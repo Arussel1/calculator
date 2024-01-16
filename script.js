@@ -34,12 +34,14 @@ let result = 0;
 for(let number of numbers){
     number.addEventListener("click", () =>{
         if(firstNumberFlag){
-            document.querySelector("#currentScreen").textContent += number.textContent;
-
             firstNumber += number.textContent;
+            document.querySelector("#currentScreen").textContent = firstNumber;
+
+            
         }else{
-            document.querySelector("#currentScreen").textContent += number.textContent;
             secondNumber += number.textContent;
+            document.querySelector("#currentScreen").textContent = secondNumber;
+            
         }
 })
     
@@ -58,7 +60,7 @@ let clear = document.querySelector("#clear");
 clear.addEventListener("click",() =>{
     firstNumber = "";
     secondNumber = "";
-    currentScreen.textContent = "";
+    currentScreen.textContent = "0";
     lastScreen.textContent = "";
     firstNumberFlag = true;
 })
@@ -66,7 +68,12 @@ del.addEventListener("click",() =>{
     if(firstNumberFlag){
      if(firstNumber.length > 0){
         firstNumber = firstNumber.substring(0,firstNumber.length-1);
-        currentScreen.textContent = firstNumber;
+        if(firstNumber.length == 0){
+            currentScreen.textContent = "0";
+        }else{
+            currentScreen.textContent = firstNumber;
+        }
+        
      }
      }else{
         if(secondNumber.length > 0){
