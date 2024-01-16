@@ -27,12 +27,14 @@ let firstNumber = "";
 let operator = "";
 let secondNumber = "";
 let firstNumberFlag = true;
+let floatFlag = true;
 let numbers = document.querySelectorAll(".number");
 let ops = document.querySelectorAll(".ops");
 let currentScreen = document.querySelector("#currentScreen");
 let lastScreen = document.querySelector("#lastScreen");
 let del = document.querySelector("#delete");
 let equ = document.querySelector("#equal");
+let float = document.querySelector("#float");
 let result = 0;
 for(let number of numbers){
     number.addEventListener("click", () =>{
@@ -67,6 +69,7 @@ for(let op of ops){
         lastScreen.textContent = firstNumber + " " +  operator; 
         currentScreen.textContent = "";
         firstNumberFlag = false;
+        floatFlag = true;
     })
 }
 
@@ -77,10 +80,14 @@ clear.addEventListener("click",() =>{
     currentScreen.textContent = "0";
     lastScreen.textContent = "";
     firstNumberFlag = true;
+    floatFlag = true;
 })
 del.addEventListener("click",() =>{
     if(firstNumberFlag){
      if(firstNumber.length > 0){
+        if(firstNumber.substring(firstNumber.length-1) == "."){
+            floatFlag = true;
+        }
         firstNumber = firstNumber.substring(0,firstNumber.length-1);
         if(firstNumber.length == 0){
             currentScreen.textContent = "0";
@@ -110,4 +117,19 @@ equ.addEventListener("click", () =>{
     }
         
 })
-
+float.addEventListener("click", () =>{
+    if(floatFlag == true){
+        floatFlag = false;
+        if(firstNumberFlag){
+            firstNumber += float.textContent;
+            document.querySelector("#currentScreen").textContent = firstNumber;
+    
+            
+        }else{
+            secondNumber += float.textContent;
+            document.querySelector("#currentScreen").textContent = secondNumber;
+            
+        }
+    }
+    
+})
