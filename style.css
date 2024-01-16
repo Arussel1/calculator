@@ -1,25 +1,44 @@
 .calculatorbox{
     background-color: lightgray;
     margin:auto;
+    margin-top: 15%;
     display:flex;
     overflow-x:auto;
     flex-wrap: wrap;
     width:300px;
-    height:500px;
+    height: 400px;
+    border:3px solid black;
 }
 .calculatorbox > button{
     max-width: 75px;
     min-width: 75px;
-    max-height: 75px;
-    min-height: 75px;
+    min-height: 50px;
     margin:0;
     display: flex;
     font-size: 30px;
     justify-content: center;
     align-items: center;
 }
-#screen{
-    height:200px;
+#currentScreen,#lastScreen{
+    min-height:65px;
     width:300px;
     background-color: palegoldenrod;
+    margin:0;
+    border:0;
+    text-align: right;
+}
+#equal{
+    min-width: 150px;
+    max-width: 150px;
+}
+footer{
+    margin-top: 30%;
+    text-align: center;
+}
+#currentScreen{
+    font-size: 50px;
+}
+
+#lastScreen{
+    font-size: 25px;
 }
