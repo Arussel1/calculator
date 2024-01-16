@@ -8,6 +8,9 @@ function multiply(a,b){
     return a * b;
 }
 function divide(a,b){
+    if(b == 0){
+        return "Error";
+    }
     return a / b;
 }
 function operate(a,b,operator){
@@ -48,7 +51,18 @@ for(let number of numbers){
 }
 
 for(let op of ops){
+
     op.addEventListener("click", () =>{
+        if(secondNumber.length > 0){
+        result = operate(Number(firstNumber),Number(secondNumber),operator);
+        lastScreen.textContent += " " + secondNumber;
+        firstNumber = result.toString();
+        secondNumber = "";
+        currentScreen.textContent = result;
+        if(currentScreen.textContent.length > 12){
+            currentScreen.textContent = currentScreen.textContent.substring(0,12);
+        }
+        }
         operator = op.textContent;
         lastScreen.textContent = firstNumber + " " +  operator; 
         currentScreen.textContent = "";
@@ -83,11 +97,17 @@ del.addEventListener("click",() =>{
      }
     })
 equ.addEventListener("click", () =>{
-        result = operate(Number(firstNumber),Number(secondNumber),operator).toPrecision(10);
+    if(firstNumber.length > 0 && secondNumber.length > 0){
+        result = operate(Number(firstNumber),Number(secondNumber),operator);
         lastScreen.textContent += " " + secondNumber;
-        firstNumber = "";
+        firstNumber = result.toString();
         secondNumber = "";
-        console.log(result);
+        firstNumberFlag = true;
         currentScreen.textContent = result;
+        if(currentScreen.textContent.length > 12){
+            currentScreen.textContent = currentScreen.textContent.substring(0,12);
+        }
+    }
+        
 })
 
