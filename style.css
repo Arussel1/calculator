@@ -1,0 +1,25 @@
+.calculatorbox{
+    background-color: lightgray;
+    margin:auto;
+    display:flex;
+    overflow-x:auto;
+    flex-wrap: wrap;
+    width:300px;
+    height:500px;
+}
+.calculatorbox > button{
+    max-width: 75px;
+    min-width: 75px;
+    max-height: 75px;
+    min-height: 75px;
+    margin:0;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+}
+#screen{
+    height:200px;
+    width:300px;
+    background-color: palegoldenrod;
+}
