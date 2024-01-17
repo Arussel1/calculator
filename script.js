@@ -35,16 +35,30 @@ let lastScreen = document.querySelector("#lastScreen");
 let del = document.querySelector("#delete");
 let equ = document.querySelector("#equal");
 let float = document.querySelector("#float");
+let negative = document.querySelector("#negative");
 let result = 0;
+const buttonMap = {
+    "=":"equal",
+    ".":"float",
+    "Backspace":"delete",
+    "Delete":"clear",
+    "Enter":"equal"
+}
 for(let number of numbers){
     number.addEventListener("click", () =>{
         if(firstNumberFlag){
             firstNumber += number.textContent;
+            if(firstNumber.length > 10){
+                firstNumber = firstNumber.substring(0,10);
+            }
             document.querySelector("#currentScreen").textContent = firstNumber;
 
             
         }else{
             secondNumber += number.textContent;
+            if(secondNumber.length > 10){
+                secondNumber = secondNumber.substring(0,10);
+            }
             document.querySelector("#currentScreen").textContent = secondNumber;
             
         }
@@ -111,8 +125,8 @@ equ.addEventListener("click", () =>{
         secondNumber = "";
         firstNumberFlag = true;
         currentScreen.textContent = result;
-        if(currentScreen.textContent.length > 12){
-            currentScreen.textContent = currentScreen.textContent.substring(0,12);
+        if(currentScreen.textContent.length > 10){
+            currentScreen.textContent = currentScreen.textContent.substring(0,10);
         }
     }
         
@@ -123,13 +137,24 @@ float.addEventListener("click", () =>{
         if(firstNumberFlag){
             firstNumber += float.textContent;
             document.querySelector("#currentScreen").textContent = firstNumber;
-    
+            
             
         }else{
             secondNumber += float.textContent;
             document.querySelector("#currentScreen").textContent = secondNumber;
             
         }
+    }    
+})
+
+document.addEventListener("keydown", () =>{
+    let keyName = event.key;
+    if (keyName in buttonMap){
+        keyName = buttonMap[keyName];
     }
-    
+    try{
+        document.getElementById(keyName).click();
+    }catch(err){
+        console.log(keyName);
+    }
 })
