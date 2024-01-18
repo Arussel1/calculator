@@ -49,7 +49,14 @@ for(let number of numbers){
         if(firstNumberFlag){
             firstNumber += number.textContent;
             if(firstNumber.length > 10){
-                firstNumber = firstNumber.substring(0,10);
+
+                let lastDig = 0;
+                for(let i = 0;i < 10;i++){
+                    if (firstNumber.substring(i,i+1) != "0"){
+                        lastDig = i;
+                    }
+                }
+                firstNumber = firstNumber.substring(0,lastDig+1);
             }
             document.querySelector("#currentScreen").textContent = firstNumber;
 
@@ -72,7 +79,11 @@ for(let op of ops){
         if(secondNumber.length > 0){
         result = operate(Number(firstNumber),Number(secondNumber),operator);
         lastScreen.textContent += " " + secondNumber;
-        firstNumber = result.toString();
+        if(result == "Error"){
+            firstNumber = "";
+        }else{
+            firstNumber = result.toString();
+        }
         secondNumber = "";
         currentScreen.textContent = result;
         if(currentScreen.textContent.length > 12){
@@ -121,7 +132,11 @@ equ.addEventListener("click", () =>{
     if(firstNumber.length > 0 && secondNumber.length > 0){
         result = operate(Number(firstNumber),Number(secondNumber),operator);
         lastScreen.textContent += " " + secondNumber;
-        firstNumber = result.toString();
+        if(result == "Error"){
+            firstNumber = "";
+        }else{
+            firstNumber = result.toString();
+        }
         secondNumber = "";
         firstNumberFlag = true;
         currentScreen.textContent = result;
@@ -135,14 +150,19 @@ float.addEventListener("click", () =>{
     if(floatFlag == true){
         floatFlag = false;
         if(firstNumberFlag){
-            firstNumber += float.textContent;
-            document.querySelector("#currentScreen").textContent = firstNumber;
-            
-            
+            if(firstNumber.length > 0){
+                firstNumber += float.textContent;
+                document.querySelector("#currentScreen").textContent = firstNumber;
+            }else{
+                floatFlag = true;
+            }
         }else{
-            secondNumber += float.textContent;
-            document.querySelector("#currentScreen").textContent = secondNumber;
-            
+            if(secondNumber.length > 0){
+                secondNumber += float.textContent;
+                document.querySelector("#currentScreen").textContent = secondNumber;
+            }else{
+                floatFlag = true;
+            }
         }
     }    
 })
